@@ -1,0 +1,34 @@
+{% extends "base.html" %} {% block content %} {% load static %}
+
+<Section class="content">
+    <section class="post_form">
+        <form action="/" method="POST">
+            {% csrf_token %}
+            <input type="text" name="name" placeholder="Name" required />
+            <textarea name="body" placeholder="What are you thinking about" required></textarea>
+            <input type="submit" value="Post" />
+        </form>
+        
+    </section>
+    <section class="posts">
+        <ul>
+        {% for post in posts %}
+         <li>
+             <div class="logo">
+             <img src="{% static 'img/user.png' %}" alt="">
+            </div>
+            <div class="name_body">
+             <div class="name">{{ post.name }}</div>     
+             <div class="datetime">{{ post.created_at }}</div>
+             <p>{{ post.body }}</p>
+             <a href="/delete/{{ post.id }}/">delete</a>
+            </div>
+         </li>
+         {% endfor %}
+        </ul>
+    </section>
+
+</Section>
+
+
+{% endblock %}
